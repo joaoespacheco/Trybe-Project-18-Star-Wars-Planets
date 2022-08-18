@@ -4,7 +4,6 @@ import DataContext from '../context/DataContext';
 export default function Table() {
   const { planets } = useContext(DataContext);
   const keys = planets.length === 0 ? [] : Object.keys(planets[0]);
-  console.log(planets);
   return (
     <section>
       <table>

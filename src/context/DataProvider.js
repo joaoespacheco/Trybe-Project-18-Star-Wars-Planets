@@ -1,22 +1,23 @@
-import { node } from 'prop-types';
 import React, { useState, useEffect } from 'react';
+import { node } from 'prop-types';
 import DataContext from './DataContext';
 import getSWApi from '../services/SWApi';
 
 function DataProvider({ children }) {
   const [planets, setPlanets] = useState([]);
+  const [filterByName, setFilterByName] = useState({ name: '' });
 
   const requestPlanets = async () => {
-    try {
-      const response = await getSWApi();
-      const data = response.results;
-      data.forEach((_planet, index) => {
-        delete data[index].residents;
-      });
-      setPlanets(data);
-    } catch (error) {
-      console.log(error);
-    }
+    const response = await getSWApi();
+    const data = response.results;
+    data.forEach((_planet, index) => {
+      delete data[index].residents;
+    });
+    setPlanets(data);
+  };
+
+  const handleFilterByName = (value) => {
+    setFilterByName({ name: value });
   };
 
   useEffect(() => {
@@ -24,7 +25,7 @@ function DataProvider({ children }) {
   }, []);
 
   return (
-    <DataContext.Provider value={ { planets } }>
+    <DataContext.Provider value={ { planets, filterByName, handleFilterByName } }>
       {children}
     </DataContext.Provider>
   );
