@@ -2,20 +2,26 @@ import React, { useContext } from 'react';
 import DataContext from '../context/DataContext';
 
 export default function Table() {
-  const { planets } = useContext(DataContext);
+  const { planets, filterByName } = useContext(DataContext);
   const keys = planets.length === 0 ? [] : Object.keys(planets[0]);
+  const planetsFiltered = planets.filter(({ name }) => name.includes(filterByName.name));
+
   return (
     <section>
       <table>
         <thead>
           <tr>
             {keys.map((key, index) => (
-              <th key={ `${key}-${index}` }>{key.replace('_', ' ')}</th>
+              <th key={ `${key}-${index}` }>
+                {(key.split('')[0].toUpperCase() + key.split(
+                  '',
+                ).splice(1).join('')).replace('_', ' ')}
+              </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {planets.map((planet, index) => (
+          {planetsFiltered.map((planet, index) => (
             <tr key={ `${planet.name}-${index}` }>
               <td>{planet.name}</td>
               <td>{planet.rotation_period}</td>
