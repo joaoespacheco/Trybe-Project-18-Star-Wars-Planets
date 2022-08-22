@@ -7,17 +7,13 @@ export default function Filters() {
     handleFilterByName,
     handleFilterByNumericValues,
     filterByNumericValues,
+    resetFilterByNumericValues,
   } = useContext(DataContext);
 
   const [localFilterValues, setlocalFilterValues] = useState({
     column: 'population',
     comparison: 'maior que',
     value: 0 });
-
-  const handleLocalFilter = ({ target }) => {
-    const { id, value } = target;
-    setlocalFilterValues({ ...localFilterValues, [id]: value });
-  };
 
   const allFilters = [
     'population',
@@ -32,6 +28,20 @@ export default function Filters() {
   const filterAvaible = allFilters.filter(
     (columnFilter) => !filtersUsed.includes(columnFilter),
   );
+
+  const handleLocalFilter = ({ target }) => {
+    const { id, value } = target;
+    setlocalFilterValues({ ...localFilterValues, [id]: value });
+  };
+
+  const activeNewFilters = () => {
+    handleFilterByNumericValues(localFilterValues);
+    setlocalFilterValues({
+      column: filterAvaible[0],
+      comparison: 'maior que',
+      value: 0,
+    });
+  };
 
   return (
     <section>
@@ -52,7 +62,6 @@ export default function Filters() {
           <select
             id="column"
             data-testid="column-filter"
-            value={ localFilterValues.column }
             onChange={ handleLocalFilter }
           >
             {filterAvaible.map((filter) => (
@@ -90,9 +99,16 @@ export default function Filters() {
         <button
           type="button"
           data-testid="button-filter"
-          onClick={ () => handleFilterByNumericValues(localFilterValues) }
+          onClick={ activeNewFilters }
         >
           Adicionar filtro
+        </button>
+        <button
+          type="button"
+          data-testid="button-remove-filters"
+          onClick={ resetFilterByNumericValues }
+        >
+          Remover Filtros
         </button>
       </div>
     </section>

@@ -21,6 +21,16 @@ function DataProvider({ children }) {
     setNumericValues([...filterByNumericValues, currentFilter]);
   };
 
+  const removeFilterByNumericValues = ({ target }) => {
+    const { id } = target;
+    const newNumericValues = filterByNumericValues.filter(({ column }) => column !== id);
+    setNumericValues(newNumericValues);
+  };
+
+  const resetFilterByNumericValues = () => {
+    setNumericValues([]);
+  };
+
   const handleFilterByName = (value) => {
     setFilterByName({ name: value });
   };
@@ -37,6 +47,8 @@ function DataProvider({ children }) {
         filterByNumericValues,
         handleFilterByName,
         handleFilterByNumericValues,
+        removeFilterByNumericValues,
+        resetFilterByNumericValues,
       } }
     >
       {children}

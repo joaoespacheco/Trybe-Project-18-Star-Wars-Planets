@@ -2,7 +2,12 @@ import React, { useContext } from 'react';
 import DataContext from '../context/DataContext';
 
 export default function Table() {
-  const { planets, filterByName, filterByNumericValues } = useContext(DataContext);
+  const {
+    planets,
+    filterByName,
+    filterByNumericValues,
+    removeFilterByNumericValues,
+  } = useContext(DataContext);
 
   const keys = planets.length === 0 ? [] : Object.keys(planets[0]);
   const planetsFilteredByName = planets.filter(
@@ -39,9 +44,15 @@ export default function Table() {
     <section>
       {filterByNumericValues.length > 0 ? (
         filterByNumericValues.map(({ column, comparison, value }, index) => (
-          <div key={ index }>
+          <div key={ index } data-testid="filter">
             <span>{`${column} ${comparison} ${value}`}</span>
-            <button type="button">deletar</button>
+            <button
+              id={ column }
+              type="button"
+              onClick={ removeFilterByNumericValues }
+            >
+              deletar
+            </button>
           </div>
         ))
       ) : (
