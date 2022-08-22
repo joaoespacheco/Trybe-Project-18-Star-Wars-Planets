@@ -61,7 +61,10 @@ export default function Table() {
         </thead>
         <tbody>
           {planetsFiltered.map((planet, index) => (
-            <tr key={ `${planet.name}-${index}` }>
+            <tr
+              key={ `${planet.name}-${index}` }
+              data-testid={ `${planet.name}-${index}` }
+            >
               <td>{planet.name}</td>
               <td>{planet.rotation_period}</td>
               <td>{planet.orbital_period}</td>
