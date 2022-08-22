@@ -3,36 +3,50 @@ import DataContext from '../context/DataContext';
 
 export default function Table() {
   const { planets, filterByName, filterByNumericValues } = useContext(DataContext);
-  const {
-    column,
-    comparison,
-    value,
-  } = filterByNumericValues;
 
   const keys = planets.length === 0 ? [] : Object.keys(planets[0]);
   const planetsFilteredByName = planets.filter(
     ({ name }) => name.includes(filterByName.name),
   );
 
+  let planetsFiltered = planetsFilteredByName;
+
   const filterByValuesFunc = (coluna, metodo, valor) => {
     if (metodo === 'menor que') {
-      return (planetsFilteredByName.filter(
+      return (planetsFiltered.filter(
         (planet) => Number(planet[coluna]) < Number(valor),
       ));
     } if (metodo === 'igual a') {
-      return (planetsFilteredByName.filter(
+      return (planetsFiltered.filter(
         (planet) => Number(planet[coluna]) === Number(valor),
       ));
     }
-    return (planetsFilteredByName.filter(
-      (planet) => Number(planet[coluna]) > Number(valor),
+    if (metodo === 'maior que') {
+      return (planetsFiltered.filter(
+        (planet) => Number(planet[coluna]) > Number(valor),
+      ));
+    }
+    return (planetsFiltered.filter(
+      (planet) => Number(planet.population) > 0,
     ));
   };
 
-  const planetFilteredByValue = filterByValuesFunc(column, comparison, value);
+  filterByNumericValues.forEach(({ column = '', comparison = '', value = '' }) => {
+    planetsFiltered = filterByValuesFunc(column, comparison, value);
+  });
 
   return (
     <section>
+      {filterByNumericValues.length > 0 ? (
+        filterByNumericValues.map(({ column, comparison, value }, index) => (
+          <div key={ index }>
+            <span>{`${column} ${comparison} ${value}`}</span>
+            <button type="button">deletar</button>
+          </div>
+        ))
+      ) : (
+        ''
+      )}
       <table>
         <thead>
           <tr>
@@ -46,7 +60,7 @@ export default function Table() {
           </tr>
         </thead>
         <tbody>
-          {planetFilteredByValue.map((planet, index) => (
+          {planetsFiltered.map((planet, index) => (
             <tr key={ `${planet.name}-${index}` }>
               <td>{planet.name}</td>
               <td>{planet.rotation_period}</td>

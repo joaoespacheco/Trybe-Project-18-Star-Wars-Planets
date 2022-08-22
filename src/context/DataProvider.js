@@ -6,10 +6,7 @@ import getSWApi from '../services/SWApi';
 function DataProvider({ children }) {
   const [planets, setPlanets] = useState([]);
   const [filterByName, setFilterByName] = useState({ name: '' });
-  const [filterByNumericValues, setNumericValues] = useState({
-    column: 'population',
-    comparison: 'maior que',
-    value: 0 });
+  const [filterByNumericValues, setNumericValues] = useState([]);
 
   const requestPlanets = async () => {
     const response = await getSWApi();
@@ -21,7 +18,7 @@ function DataProvider({ children }) {
   };
 
   const handleFilterByNumericValues = (currentFilter) => {
-    setNumericValues(currentFilter);
+    setNumericValues([...filterByNumericValues, currentFilter]);
   };
 
   const handleFilterByName = (value) => {
