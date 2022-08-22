@@ -2,9 +2,34 @@ import React, { useContext } from 'react';
 import DataContext from '../context/DataContext';
 
 export default function Table() {
-  const { planets, filterByName } = useContext(DataContext);
+  const { planets, filterByName, filterByNumericValues } = useContext(DataContext);
+  const {
+    column,
+    comparison,
+    value,
+  } = filterByNumericValues;
+
   const keys = planets.length === 0 ? [] : Object.keys(planets[0]);
-  const planetsFiltered = planets.filter(({ name }) => name.includes(filterByName.name));
+  const planetsFilteredByName = planets.filter(
+    ({ name }) => name.includes(filterByName.name),
+  );
+
+  const filterByValuesFunc = (coluna, metodo, valor) => {
+    if (metodo === 'menor que') {
+      return (planetsFilteredByName.filter(
+        (planet) => Number(planet[coluna]) < Number(valor),
+      ));
+    } if (metodo === 'igual a') {
+      return (planetsFilteredByName.filter(
+        (planet) => Number(planet[coluna]) === Number(valor),
+      ));
+    }
+    return (planetsFilteredByName.filter(
+      (planet) => Number(planet[coluna]) > Number(valor),
+    ));
+  };
+
+  const planetFilteredByValue = filterByValuesFunc(column, comparison, value);
 
   return (
     <section>
@@ -21,7 +46,7 @@ export default function Table() {
           </tr>
         </thead>
         <tbody>
-          {planetsFiltered.map((planet, index) => (
+          {planetFilteredByValue.map((planet, index) => (
             <tr key={ `${planet.name}-${index}` }>
               <td>{planet.name}</td>
               <td>{planet.rotation_period}</td>
