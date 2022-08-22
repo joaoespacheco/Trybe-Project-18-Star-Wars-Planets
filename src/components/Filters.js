@@ -6,6 +6,7 @@ export default function Filters() {
     filterByName,
     handleFilterByName,
     handleFilterByNumericValues,
+    filterByNumericValues,
   } = useContext(DataContext);
 
   const [localFilterValues, setlocalFilterValues] = useState({
@@ -17,6 +18,20 @@ export default function Filters() {
     const { id, value } = target;
     setlocalFilterValues({ ...localFilterValues, [id]: value });
   };
+
+  const allFilters = [
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ];
+
+  const filtersUsed = filterByNumericValues.map(({ column }) => column);
+
+  const filterAvaible = allFilters.filter(
+    (columnFilter) => !filtersUsed.includes(columnFilter),
+  );
 
   return (
     <section>
@@ -40,11 +55,14 @@ export default function Filters() {
             value={ localFilterValues.column }
             onChange={ handleLocalFilter }
           >
-            <option value="population">population</option>
-            <option value="orbital_period">orbital_period</option>
-            <option value="diameter">diameter</option>
-            <option value="rotation_period">rotation_period</option>
-            <option value="surface_water">surface_water</option>
+            {filterAvaible.map((filter) => (
+              <option
+                key={ filter }
+                value={ filter }
+              >
+                {filter}
+              </option>
+            ))}
           </select>
         </label>
         <label htmlFor="comparison">
