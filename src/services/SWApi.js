@@ -1,4 +1,4 @@
-const BASE_API = 'https://swapi-trybe.herokuapp.com/api/planets/';
+const BASE_API = 'https://swapi.dev/api/planets';
 
 const getSWApi = async () => {
   try {

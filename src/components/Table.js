@@ -7,6 +7,7 @@ export default function Table() {
     filterByName,
     filterByNumericValues,
     removeFilterByNumericValues,
+    ordenationValues,
   } = useContext(DataContext);
 
   const keys = planets.length === 0 ? [] : Object.keys(planets[0]);
@@ -39,6 +40,26 @@ export default function Table() {
   filterByNumericValues.forEach(({ column = '', comparison = '', value = '' }) => {
     planetsFiltered = filterByValuesFunc(column, comparison, value);
   });
+
+  const orderAsc = (a, b) => {
+    const negativeResponse = -1;
+    if (b[ordenationValues.column] === 'unknown') {
+      return negativeResponse;
+    }
+    const result = a[ordenationValues.column] - b[ordenationValues.column];
+    return result;
+  };
+
+  const orderDesc = (a, b) => {
+    const negativeResponse = -1;
+    if (b[ordenationValues.column] === 'unknown') {
+      return negativeResponse;
+    }
+    const result = b[ordenationValues.column] - a[ordenationValues.column];
+    return result;
+  };
+
+  planetsFiltered.sort(ordenationValues.sort === 'DESC' ? orderDesc : orderAsc);
 
   return (
     <section>
@@ -76,7 +97,11 @@ export default function Table() {
               key={ `${planet.name}-${index}` }
               data-testid={ `${planet.name}-${index}` }
             >
-              <td>{planet.name}</td>
+              <td
+                data-testid="planet-name"
+              >
+                {planet.name}
+              </td>
               <td>{planet.rotation_period}</td>
               <td>{planet.orbital_period}</td>
               <td>{planet.diameter}</td>

@@ -8,12 +8,17 @@ export default function Filters() {
     handleFilterByNumericValues,
     filterByNumericValues,
     resetFilterByNumericValues,
+    handleOrdenationValues,
   } = useContext(DataContext);
 
   const [localFilterValues, setlocalFilterValues] = useState({
     column: 'population',
     comparison: 'maior que',
     value: 0 });
+
+  const [localOrdenationValues, setlocalOrdenationValues] = useState({
+    column: 'population',
+    sort: 'ASC' });
 
   const allFilters = [
     'population',
@@ -32,6 +37,11 @@ export default function Filters() {
   const handleLocalFilter = ({ target }) => {
     const { id, value } = target;
     setlocalFilterValues({ ...localFilterValues, [id]: value });
+  };
+
+  const handleLocalOrder = ({ target }) => {
+    const { name, value } = target;
+    setlocalOrdenationValues({ ...localOrdenationValues, [name]: value });
   };
 
   const activeNewFilters = () => {
@@ -109,6 +119,50 @@ export default function Filters() {
           onClick={ resetFilterByNumericValues }
         >
           Remover Filtros
+        </button>
+        <label htmlFor="order-columns">
+          Ordenar
+          <select
+            id="order-columns"
+            name="column"
+            data-testid="column-sort"
+            onChange={ handleLocalOrder }
+          >
+            {allFilters.map((column) => (
+              <option key={ column }>{column}</option>
+            ))}
+          </select>
+        </label>
+        <label htmlFor="asc-radio">
+          <input
+            id="asc-radio"
+            name="sort"
+            type="radio"
+            data-testid="column-sort-input-asc"
+            value="ASC"
+            checked={ localOrdenationValues.sort === 'ASC' }
+            onChange={ handleLocalOrder }
+          />
+          Ascendente
+        </label>
+        <label htmlFor="desc-radio">
+          <input
+            id="desc-radio"
+            name="sort"
+            type="radio"
+            data-testid="column-sort-input-desc"
+            value="DESC"
+            checked={ localOrdenationValues.sort === 'DESC' }
+            onChange={ handleLocalOrder }
+          />
+          Descendente
+        </label>
+        <button
+          type="button"
+          data-testid="column-sort-button"
+          onClick={ () => handleOrdenationValues(localOrdenationValues) }
+        >
+          Ordenar
         </button>
       </div>
     </section>

@@ -7,6 +7,7 @@ function DataProvider({ children }) {
   const [planets, setPlanets] = useState([]);
   const [filterByName, setFilterByName] = useState({ name: '' });
   const [filterByNumericValues, setNumericValues] = useState([]);
+  const [ordenationValues, setOrdenationValues] = useState({});
 
   const requestPlanets = async () => {
     const response = await getSWApi();
@@ -19,6 +20,10 @@ function DataProvider({ children }) {
 
   const handleFilterByNumericValues = (currentFilter) => {
     setNumericValues([...filterByNumericValues, currentFilter]);
+  };
+
+  const handleOrdenationValues = (currentOrderValues) => {
+    setOrdenationValues(currentOrderValues);
   };
 
   const removeFilterByNumericValues = ({ target }) => {
@@ -45,10 +50,12 @@ function DataProvider({ children }) {
         planets,
         filterByName,
         filterByNumericValues,
+        ordenationValues,
         handleFilterByName,
         handleFilterByNumericValues,
         removeFilterByNumericValues,
         resetFilterByNumericValues,
+        handleOrdenationValues,
       } }
     >
       {children}
