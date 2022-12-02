@@ -27,17 +27,12 @@ export default function Table() {
         (planet) => Number(planet[coluna]) === Number(valor),
       ));
     }
-    if (metodo === 'maior que') {
-      return (planetsFiltered.filter(
-        (planet) => Number(planet[coluna]) > Number(valor),
-      ));
-    }
     return (planetsFiltered.filter(
-      (planet) => Number(planet.population) > 0,
+      (planet) => Number(planet[coluna]) > Number(valor),
     ));
   };
 
-  filterByNumericValues.forEach(({ column = '', comparison = '', value = '' }) => {
+  filterByNumericValues.forEach(({ column, comparison, value }) => {
     planetsFiltered = filterByValuesFunc(column, comparison, value);
   });
 

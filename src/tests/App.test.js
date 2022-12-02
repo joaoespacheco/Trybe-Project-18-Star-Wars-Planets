@@ -95,9 +95,69 @@ describe('Testando a página de inicial', () => {
     userEvent.click(buttonFilter);
  
     expect(screen.getByTestId("Kamino-0")).toBeInTheDocument();
-    const currentTableRows = screen.getAllByRole("row");
-    expect(currentTableRows).toHaveLength(2);
+    const secondTableRows = screen.getAllByRole("row");
+    expect(secondTableRows).toHaveLength(2);
 
+    userEvent.selectOptions(columnFilter, "diameter");
+    userEvent.selectOptions(comparisonFilter, "menor que");
+    userEvent.clear(valueFilter);
+    userEvent.type(valueFilter, "20000");
+    userEvent.click(buttonFilter);
+
+    expect(screen.getByTestId("Kamino-0")).toBeInTheDocument();
+    const thirdTableRows = screen.getAllByRole("row");
+    expect(thirdTableRows).toHaveLength(2);
+
+  })
+
+  it('Verificando as funcionalidades dos ordenação descendente de valores', async () => {
+    global.fetch = async () => ({
+      json: async () => (planetsMock),
+    });
+    
+    renderWithContext(<App />);
+
+    await waitFor (() => {
+      expect(screen.getByTestId("Tatooine-0")).toBeInTheDocument();
+    });
+
+    const columnOrder = screen.getByTestId('column-sort');
+    const orderType = screen.getByTestId('column-sort-input-desc');
+    const buttonOrder = screen.getByTestId('column-sort-button');
+
+    userEvent.selectOptions(columnOrder, "population");
+    userEvent.click(orderType);
+    userEvent.click(buttonOrder);
+
+    expect(screen.getByTestId("Coruscant-0")).toBeInTheDocument();
+
+    const tableRows = screen.getAllByRole("row");
+    expect(tableRows).toHaveLength(11);
+  })
+
+  it('Verificando as funcionalidades dos ordenação ascendente de valores', async () => {
+    global.fetch = async () => ({
+      json: async () => (planetsMock),
+    });
+    
+    renderWithContext(<App />);
+
+    await waitFor (() => {
+      expect(screen.getByTestId("Tatooine-0")).toBeInTheDocument();
+    });
+
+    const columnOrder = screen.getByTestId('column-sort');
+    const orderType = screen.getByTestId('column-sort-input-asc');
+    const buttonOrder = screen.getByTestId('column-sort-button');
+
+    userEvent.selectOptions(columnOrder, "surface_water");
+    userEvent.click(orderType);
+    userEvent.click(buttonOrder);
+
+    expect(screen.getByTestId("Bespin-0")).toBeInTheDocument();
+
+    const tableRows = screen.getAllByRole("row");
+    expect(tableRows).toHaveLength(11);
   })
 
 })
