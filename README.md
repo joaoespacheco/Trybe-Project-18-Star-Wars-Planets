@@ -4,7 +4,7 @@
 
 Projeto desenvolvido durante o módulo de front-end do curso de desenvolvimento web da [Trybe](https://www.betrybe.com/).
 
-Neste projeto foi desenvolvida uma aplicação contendo uma lista de informações de planetas do universo de StarWars.
+Neste projeto foi desenvolvida uma aplicação contendo uma lista de informações sobre os planetas do universo de StarWars.
 
 Dentro da aplicação o usuário poderá:
 > * Filtrar os planetas pelo nome ou características
