@@ -91,6 +91,7 @@ Para executar e verificar a cobertura de testes, rode o comando abaixo:
 ## 🧰 Ferramentas:
 * HTML
 * CSS
+  * SASS
 * JavaScript
 * React
   * React Context API
