@@ -18,6 +18,9 @@ A aplicação também conta com o uso de <strong>Context API e Hooks</strong> pa
 <details>
 <summary><strong>Desempenho</strong></summary>
 Aprovado com 100% de desempenho em todos os requisitos
+
+![image](https://user-images.githubusercontent.com/99846604/211173771-01c348c5-5d70-46f6-8c72-bb96cf250283.png)
+
 </details>
 
 <details>
@@ -39,8 +42,40 @@ Aprovado com 100% de desempenho em todos os requisitos
 
 <details>
 <summary><strong>Visualizar projeto</strong></summary>
-:construction: Área em construção ! :construction:
+
+### Tela principal:
+
+![starwars-planets-layout](https://user-images.githubusercontent.com/99846604/211174080-54fa43dd-4fac-4af6-b394-06a83e670f3c.gif)
+
 </details>
+</br>
+
+## ⚙️ Execução
+
+Faça o clone deste repositório com o seguinte comando:
+
+        git clone git@github.com:joaoespacheco/Trybe-Project-18-Star-Wars-Planets.git
+
+Para exercutar o projeto utilize o comando abaixo para instalar as dependências:
+
+        npm install
+
+Inicie a aplicação com o comando abaixo:
+
+        npm start
+        
+Para exeutar os testes deve-se utilizar o seguinte comando:
+
+        npm test
+
+Caso queira executar um teste específico, rode o comando abaixo:
+
+        npm test <nome-do-arquivo>
+
+Para executar e verificar a cobertura de testes, rode o comando abaixo:
+
+        npm run test-coverage
+
 </br>
 
 ## 🤹🏽 Habilidades Desenvolvidas:
