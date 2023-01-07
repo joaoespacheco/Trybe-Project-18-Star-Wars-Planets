@@ -1,13 +1,16 @@
 import React from 'react';
-import './App.css';
+import './styles/main.scss';
 import Table from './components/Table';
 import Filters from './components/Filters';
 
 function App() {
   return (
     <main>
-      <Filters />
-      <Table />
+      <div className="stars" />
+      <div className="home-container">
+        <Filters />
+        <Table />
+      </div>
     </main>
   );
 }

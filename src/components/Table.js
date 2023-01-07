@@ -54,14 +54,23 @@ export default function Table() {
     return result;
   };
 
+  const createFilmsTags = (films) => {
+    const filmsMapper = films.map((film) => <p key={ film }>{film}</p>);
+    return filmsMapper;
+  };
+
   planetsFiltered.sort(ordenationValues.sort === 'DESC' ? orderDesc : orderAsc);
 
   return (
-    <section>
+    <div className="table-container">
       {filterByNumericValues.length > 0 ? (
         filterByNumericValues.map(({ column, comparison, value }, index) => (
-          <div key={ index } data-testid="filter">
-            <span>{`${column} ${comparison} ${value}`}</span>
+          <div
+            key={ index }
+            data-testid="filter"
+            className="table-container-filters-used"
+          >
+            <p>{`${column} ${comparison} ${value}`}</p>
             <button
               id={ column }
               type="button"
@@ -105,14 +114,12 @@ export default function Table() {
               <td>{planet.terrain}</td>
               <td>{planet.surface_water}</td>
               <td>{planet.population}</td>
-              <td>{planet.films}</td>
-              <td>{planet.created}</td>
-              <td>{planet.edited}</td>
+              <td>{createFilmsTags(planet.films)}</td>
               <td>{planet.url}</td>
             </tr>
           ))}
         </tbody>
       </table>
-    </section>
+    </div>
   );
 }
