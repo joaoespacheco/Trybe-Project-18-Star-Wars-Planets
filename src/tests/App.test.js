@@ -38,7 +38,7 @@ describe('Testando a página de inicial', () => {
 
 
     expect(tableRows).toHaveLength(11);
-    expect(tableCells).toHaveLength(130);
+    expect(tableCells).toHaveLength(110);
   })
 
   it('Verificando as funcionalidades do filtro de nomes', async () => {
