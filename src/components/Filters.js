@@ -54,9 +54,14 @@ export default function Filters() {
   };
 
   return (
-    <section>
-      <div>
+    <div className="filters-container">
+      <div className="filters-container-title">
+        <h1>Star Wars</h1>
+        <h2>Planets Search</h2>
+      </div>
+      <div className="filters-container-filter-bar">
         <label htmlFor="text-filter">
+          <p>Nome:</p>
           <input
             id="text-filter"
             type="text"
@@ -65,10 +70,8 @@ export default function Filters() {
             onChange={ ({ target }) => handleFilterByName(target.value) }
           />
         </label>
-      </div>
-      <div>
         <label htmlFor="column">
-          Coluna
+          <p>Coluna:</p>
           <select
             id="column"
             data-testid="column-filter"
@@ -85,7 +88,7 @@ export default function Filters() {
           </select>
         </label>
         <label htmlFor="comparison">
-          Operador
+          <p>Operador:</p>
           <select
             id="comparison"
             data-testid="comparison-filter"
@@ -98,6 +101,7 @@ export default function Filters() {
           </select>
         </label>
         <label htmlFor="value">
+          <p>Valor:</p>
           <input
             data-testid="value-filter"
             id="value"
@@ -120,8 +124,10 @@ export default function Filters() {
         >
           Remover Filtros
         </button>
+      </div>
+      <div className="filters-container-order-bar">
         <label htmlFor="order-columns">
-          Ordenar
+          <p>Ordernar:</p>
           <select
             id="order-columns"
             name="column"
@@ -133,30 +139,32 @@ export default function Filters() {
             ))}
           </select>
         </label>
-        <label htmlFor="asc-radio">
-          <input
-            id="asc-radio"
-            name="sort"
-            type="radio"
-            data-testid="column-sort-input-asc"
-            value="ASC"
-            checked={ localOrdenationValues.sort === 'ASC' }
-            onChange={ handleLocalOrder }
-          />
-          Ascendente
-        </label>
-        <label htmlFor="desc-radio">
-          <input
-            id="desc-radio"
-            name="sort"
-            type="radio"
-            data-testid="column-sort-input-desc"
-            value="DESC"
-            checked={ localOrdenationValues.sort === 'DESC' }
-            onChange={ handleLocalOrder }
-          />
-          Descendente
-        </label>
+        <div className="input-radio-container">
+          <label htmlFor="asc-radio">
+            <input
+              id="asc-radio"
+              name="sort"
+              type="radio"
+              data-testid="column-sort-input-asc"
+              value="ASC"
+              checked={ localOrdenationValues.sort === 'ASC' }
+              onChange={ handleLocalOrder }
+            />
+            <span>Ascendente</span>
+          </label>
+          <label htmlFor="desc-radio">
+            <input
+              id="desc-radio"
+              name="sort"
+              type="radio"
+              data-testid="column-sort-input-desc"
+              value="DESC"
+              checked={ localOrdenationValues.sort === 'DESC' }
+              onChange={ handleLocalOrder }
+            />
+            <span>Descendente</span>
+          </label>
+        </div>
         <button
           type="button"
           data-testid="column-sort-button"
@@ -165,6 +173,6 @@ export default function Filters() {
           Ordenar
         </button>
       </div>
-    </section>
+    </div>
   );
 }

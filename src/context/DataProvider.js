@@ -14,6 +14,8 @@ function DataProvider({ children }) {
     const data = response.results;
     data.forEach((_planet, index) => {
       delete data[index].residents;
+      delete data[index].created;
+      delete data[index].edited;
     });
     setPlanets(data);
   };
