@@ -54,7 +54,7 @@ Aprovado com 100% de desempenho em todos os requisitos
 
 Faça o clone deste repositório com o seguinte comando:
 
-        git clone git@github.com:joaoespacheco/Trybe-Project-18-Star-Wars-Planets.git
+        git clone git@github.com:joaoespacheco/Trybe-Project-19-Star-Wars-Planets.git
 
 Para exercutar o projeto utilize o comando abaixo para instalar as dependências:
 
