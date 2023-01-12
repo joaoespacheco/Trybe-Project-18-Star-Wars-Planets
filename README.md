@@ -41,13 +41,18 @@ Aprovado com 100% de desempenho em todos os requisitos
 </details>
 
 <details>
-<summary><strong>Visualizar projeto</strong></summary>
+<summary><strong>Imagens do projeto</strong></summary>
 
 ### Tela principal:
 
 ![starwars-planets-layout](https://user-images.githubusercontent.com/99846604/211174080-54fa43dd-4fac-4af6-b394-06a83e670f3c.gif)
 
 </details>
+
+</br>
+
+### [👨‍💻 Clique aqui para acessar o projeto em seu navegador](https://star-wars-planets-joaoespacheco.vercel.app/) 
+
 </br>
 
 ## ⚙️ Execução
@@ -56,7 +61,7 @@ Faça o clone deste repositório com o seguinte comando:
 
         git clone git@github.com:joaoespacheco/Trybe-Project-19-Star-Wars-Planets.git
 
-Para exercutar o projeto utilize o comando abaixo para instalar as dependências:
+Dentro da pasta raiz do projeto, instale as dependências com o seguinte comando:
 
         npm install
 
